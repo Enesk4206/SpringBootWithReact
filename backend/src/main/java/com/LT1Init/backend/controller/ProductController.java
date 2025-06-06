@@ -14,35 +14,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.LT1Init.backend.dto.CategoryRequest;
-import com.LT1Init.backend.service.CategoryService;
+import com.LT1Init.backend.dto.ProductRequest;
+import com.LT1Init.backend.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins="http://localhost:5173")
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/api/product")
 @RequiredArgsConstructor
-public class CategoryController {
-    private final CategoryService categoryService;
+public class ProductController {
 
-    @GetMapping("/all-categories")
-    public ResponseEntity<List<CategoryRequest>> getAllCategoriesAPI(){
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getAllCategories());
+    private final ProductService productService;
+
+    @GetMapping("/all-products")
+    public ResponseEntity<List<ProductRequest>> getAllProductsAPI(){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getAllProducts());
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CategoryRequest> createAPI(@RequestBody CategoryRequest request){
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.create(request));
+    public ResponseEntity<ProductRequest> createAPI(@RequestBody ProductRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(request));
     }
 
      @PutMapping("/update/{id}")
-    public ResponseEntity<CategoryRequest> updateAPI(@PathVariable Long id, @RequestBody CategoryRequest request){
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.update(id,request));
+    public ResponseEntity<ProductRequest> updateAPI(@PathVariable Long id, @RequestBody ProductRequest request){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.update(id,request));
     }
      @DeleteMapping("/delete/{id}")
-    public ResponseEntity<CategoryRequest> deleteAPI(@PathVariable Long id){
-        categoryService.delete(id);
+    public ResponseEntity<ProductRequest> deleteAPI(@PathVariable Long id){
+        productService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+    
 }

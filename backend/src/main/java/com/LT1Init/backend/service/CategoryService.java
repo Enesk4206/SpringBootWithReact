@@ -20,7 +20,7 @@ public class CategoryService {
 
     public CategoryRequest create(CategoryRequest request){
        try {
-            if(categoryRepository.existsByCategoryName(request.getName())){
+            if(categoryRepository.existsByName(request.getName())){
                 throw new RuntimeException("Kategori zaten var!"+request.getName());
             }
           
@@ -32,6 +32,7 @@ public class CategoryService {
             Category created = categoryRepository.save(category);
 
             return new CategoryRequest(
+                created.getId(),
                 created.getName(),
                 created.getProducts().stream().map(Product::getName).collect(Collectors.toSet())
             );
@@ -47,6 +48,7 @@ public class CategoryService {
 
         return categories.stream().map(
             category -> new CategoryRequest(
+                category.getId(),
                 category.getName(),
                 category.getProducts().stream().map(Product::getName).collect(Collectors.toSet())
             )
@@ -68,6 +70,7 @@ public class CategoryService {
         Category updated = categoryRepository.save(existsCategory);
 
             return new CategoryRequest(
+                updated.getId(),
                 updated.getName(),
                 updated.getProducts().stream().map(Product::getName).collect(Collectors.toSet())
             );

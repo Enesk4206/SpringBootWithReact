@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryRequest {
+@Data
+public class ProductRequest {
     private Long id;
     private String name;
-    private Set<String> products;
+    private String description;
+    private double price;
+    private Set<String> colors;
+    private String category;
 }
